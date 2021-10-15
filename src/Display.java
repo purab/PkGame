@@ -36,14 +36,12 @@ public class Display extends JFrame {
         graphics.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 
         //create rectangle here
-        Rectangle rectangle = game.getRectangle();
-        graphics.setColor(Color.BLUE);
-        graphics.fillRect(
-                (int) rectangle.getX(),
-                (int) rectangle.getY(),
-                (int) rectangle.getWidth(),
-                (int) rectangle.getHeight()
-        );
+        game.getGameObjects().forEach(gameObject -> graphics.drawImage(
+                gameObject.getSprite(),
+                gameObject.getPosition().getX(),
+                gameObject.getPosition().getY(),
+                null
+        ));
 
         //free memory
         graphics.dispose();
