@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 public class Display extends JFrame {
 
@@ -18,9 +19,25 @@ public class Display extends JFrame {
         add(canvas);
         pack();
 
+        //stop game window flicking
+        canvas.createBufferStrategy(3);
+
         //pop up window on center
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void render(Game game) {
+        BufferStrategy bufferStrategy = canvas.getBufferStrategy();
+        Graphics graphics = bufferStrategy.getDrawGraphics();
+
+        //clear our window
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
+
+        //free memory
+        graphics.dispose();
+        bufferStrategy.show();
     }
 
 }
