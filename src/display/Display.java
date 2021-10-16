@@ -1,3 +1,8 @@
+package display;
+
+import game.Game;
+import input.Input;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -5,12 +10,15 @@ import java.awt.image.BufferStrategy;
 public class Display extends JFrame {
 
     private Canvas canvas;
+    private Renderer renderer;
 
     //created constructor
     public Display(int width, int height, Input input) {
         setTitle("PK 2d game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
+
+        this.renderer = new Renderer();
 
         //creating new window canvas
         canvas = new Canvas();
@@ -36,13 +44,8 @@ public class Display extends JFrame {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 
-        //create rectangle here
-        game.getGameObjects().forEach(gameObject -> graphics.drawImage(
-                gameObject.getSprite(),
-                gameObject.getPosition().getX(),
-                gameObject.getPosition().getY(),
-                null
-        ));
+        //Call render from Display class
+        renderer.render(game, graphics);
 
         //free memory
         graphics.dispose();

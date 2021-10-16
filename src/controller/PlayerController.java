@@ -1,6 +1,11 @@
+package controller;
+
+import controller.Controller;
+import input.Input;
+
 import java.awt.event.KeyEvent;
 
-public class PlayerController implements Controller{
+public class PlayerController implements Controller {
 
     private Input input;
 
